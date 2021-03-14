@@ -37,7 +37,7 @@ df = read_from["csv"]("path/to/some/csv/file.csv")
 
 In the first exercise you should write a decorator which logs the execution time of a function. The decorator should be called `log_execution_time` and has to be defined within the `exercises/exercises.py` file.
 
-The second decorator should catch the `Exception`, log it to `CRITICAL` and raise the `Exception` again.
+The second decorator should catch the `Exception`, log it to `CRITICAL` and raise the `Exception` again. The name of the decorator has to be `catch_exceptions` and must also be defined in `exercises/exercises.py`
 
 ## Test Solutions
 
