@@ -20,7 +20,21 @@ def log_execution_time(func: Callable) -> Callable:
             f"{(end_time - start_time):.0f}s to execute."
         )
     """
-    pass
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        # do something before
+        start_time = time.perf_counter()
+        result = func(*args, **kwargs)
+        # do something after
+        end_time = time.perf_counter()
+        logger.info(
+            f"The function: {func.__name__} took "
+            f"{(end_time - start_time):.0f}s to execute."
+        )
+        return result
+
+    return wrapper
 
 
 ###########################################
@@ -38,4 +52,19 @@ def catch_exception(func: Callable) -> Callable:
             exc_info=True
         )
     """
-    pass
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        # do something before
+        try:
+            result = func(*args, **kwargs)
+        # do something after
+        except Exception:
+            logger.critical(
+                f"The function: {func.__name__} raised the following exception:",  # noqa: E501
+                exc_info=True,
+            )
+            raise
+        return result
+
+    return wrapper
