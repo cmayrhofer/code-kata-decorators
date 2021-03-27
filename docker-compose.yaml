@@ -1,0 +1,16 @@
+version: "3.4"
+services:
+
+  # "devbox" to enable the developer to have a fully loaded development environment
+  devbox: &devbox
+    build:
+      dockerfile: "./docker/devbox.dockerfile"
+      context: "."
+      target: "devbox"
+    image: "devbox/code-kata-devbox"
+    volumes:
+      - "./:/app"
+
+  test:
+    <<: *devbox
+    command: "test --all"
